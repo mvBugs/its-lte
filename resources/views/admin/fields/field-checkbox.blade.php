@@ -14,7 +14,7 @@
         <label for="{{ $field_name }}">{!! $label ?? 'Статус' !!}</label>
     </div>
     @isset($help_block) <p class="help-block small">{!! $help_block !!}</p>@endisset
-    {!! $errors->first(str_replace_last('[]', '', $field_name), '<p class="help-block" style="color:red;">:message</p>') !!}
+    {!! $errors->first(\Illuminate\Support\Str::replaceLast('[]', '', $field_name), '<p class="help-block" style="color:red;">:message</p>') !!}
 </div>
 
 {{--

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Location;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -19,6 +20,19 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.home');
+        $locations = Location::all();
+        return view('admin.home', compact('locations'));
+    }
+
+    public function updateLocation(Request $request, $id)
+    {
+        $request->validate([
+            'commission' => 'required|integer'
+        ]);
+        Location::findOrFail($id)->update([
+            'commission' => $request->get('commission')
+        ]);
+
+        return redirect()->route('home');
     }
 }

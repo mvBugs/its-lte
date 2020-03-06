@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Driver;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class DriverController extends Controller
 {
@@ -14,7 +16,8 @@ class DriverController extends Controller
      */
     public function index()
     {
-        //
+        $drivers = Driver::paginate();
+        return view('admin.drivers.index', compact('drivers'));
     }
 
     /**
@@ -24,7 +27,7 @@ class DriverController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.drivers.create');
     }
 
     /**
@@ -35,7 +38,20 @@ class DriverController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'login' => 'required|unique:drivers,login',
+            'phone' => 'required|unique:drivers,phone',
+            'balance' => 'integer',
+            'password' => 'required',
+        ]);
+
+        Driver::create([
+            'login' => $request->get('login'),
+            'phone' => $request->get('phone'),
+            'balance' => $request->get('balance'),
+            'password' => $request->get('password'),
+        ]);
+        return redirect()->route('admin.drivers.index');
     }
 
     /**
@@ -46,7 +62,7 @@ class DriverController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -57,7 +73,8 @@ class DriverController extends Controller
      */
     public function edit($id)
     {
-        //
+        $driver = Driver::findOrFail($id);
+        return view('admin.drivers.edit', compact('driver'));
     }
 
     /**
@@ -69,7 +86,20 @@ class DriverController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'login' => 'required|unique:drivers,login',
+            'phone' => 'required|unique:drivers,phone',
+            'balance' => 'integer',
+            'password' => 'required',
+        ]);
+
+        Driver::findOrFail($id)->update([
+            'login' => $request->get('login'),
+            'phone' => $request->get('phone'),
+            'balance' => $request->get('balance'),
+            'password' => $request->get('password'),
+        ]);
+        return redirect()->route('admin.drivers.index');
     }
 
     /**
@@ -80,6 +110,7 @@ class DriverController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Driver::findOrFail($id)->delete();
+        return redirect()->route('admin.drivers.index');
     }
 }

@@ -16,3 +16,11 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/login', 'Api\Auth\LoginController@login');
+
+Route::post('order/create', 'Api\OrderController@create');
+Route::get('orders', 'Api\OrderController@index');
+Route::post('order/confirm', 'Api\OrderController@confirm');
+Route::get('user/order/{id}', 'Api\OrderController@userOrder');
+Route::get('order/cancel/{id}', 'Api\OrderController@cancel');

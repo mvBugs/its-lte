@@ -105,6 +105,7 @@
       <path value="$PROJECT_DIR$/vendor/kalnoy/nestedset" />
       <path value="$PROJECT_DIR$/vendor/fomvasss/laravel-url-aliases" />
       <path value="$PROJECT_DIR$/vendor/spatie/laravel-permission" />
+      <path value="$PROJECT_DIR$/vendor/laravelcollective/html" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />

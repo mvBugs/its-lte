@@ -10,68 +10,38 @@
 @endphp
 
 @section('content')
-{{--    @include('admin.fields.filter')--}}
-    {{--<section class="content">
-        @unless($forms->count())
-            @include('admin.inc.empty-rows', ['msg_body' => ''])
-        @else
-            <div class="box">
-                <div class="box-header">
-                    <h3 class="box-title">Список клиентов</h3>
-                </div>
-                <div class="box-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-striped">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                --}}{{--<th>Пользователь</th>--}}{{--
-                                <th>Имя</th>
-                                <th>Телефон</th>
-                                <th>Email</th>
-                                <th>Дополнительные поля</th>
-                                <th>Создано</th>
-                                <th>Статус</th>
-                                <th>Действия</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($forms as $form)
-                                <tr>
-                                    @php
-                                    $str = '';
-                                        if (is_array($form->data)) {
-                                            foreach ($form->data as $key => $value) {
-                                                $str .= $key.': '.$value.'<br>';
-                                            }
-                                        }
-                                    @endphp
-                                    <td>{{ $form->id }}</td>
-                                    <td style="width: 70px">{{ $form->name }}</td>
-                                    <td style="width: 140px">{{ $form->phone }}</td>
-                                    <td>{{ $form->email }}</td>
-                                    <td>{!! $str !!}</td>
-                                    <td style="width: 80px">{{ $form->created_at->format('Y.d.m') }}</td>
-                                    <td>
-                                        @include('admin.fields.field-select2-change-status-ajax', [
-                                            'selected' => $form->status,
-                                            'attributes' => \App\Models\Form::$formStatuses,
-                                            'data_url' => route('admin.forms.status', $form),
-                                        ])
-                                    </td>
-                                    <td style="width: 20px">
-                                        <div class="btn-group">
-                                            --}}{{--<a href="{{ route('admin.forms.edit', $form) }}" class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></a>--}}{{--
-                                            <a href="#" data-url="{{ route('admin.forms.destroy', $form) }}" class="btn btn-xs btn-danger js-action-destroy"><i class="fa fa-remove"></i></a>
+    <section class="content">
+        <div class="row">
+            @foreach($locations as $location)
+                <div class="col-md-3">
+                <div class="box">
+                    <div class="box-body">
+
+                        <!--tabs-->
+
+                        <div class="nav-tabs-justified">
+                            <div class="tab-content">
+                                <h3>{{ $location->name }}</h3>
+                                <div class="tab-pane active" id="tab_1">
+                                    <br>
+                                    {!! Form::model($location, [
+                                        'method' => 'PATCH',
+                                        'route' => ['admin.location.update', $location],
+                                    ]) !!}
+                                        <div class="form-group {{ $errors->has('commission') ? 'has-error' : ''}}">
+                                            {!! Form::label('commission', 'Коммисия', ['class' => 'control-label']) !!}
+                                            {!! Form::number('commission', null, ['class' => 'form-control', 'required']) !!}
+                                            {!! $errors->first('commission', '<p class="help-block">:message</p>') !!}
                                         </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
+                                        <button class="btn btn-success">Сохранить</button>
+                                    {!! Form::close() !!}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        @endunless
-    </section>--}}
+            @endforeach
+        </div>
+    </section>
 @endsection

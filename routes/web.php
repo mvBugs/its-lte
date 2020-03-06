@@ -20,12 +20,10 @@ Auth::routes();
 Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'namespace' => 'Web'], function () {
     Route::get('/', 'HomeController@index')->name('home');
     Route::group(['as' => 'admin.'], function () {
+        Route::patch('/location/{id}', 'HomeController@updateLocation')->name('location.update');
         Route::resource('clients', 'ClientController');
         Route::resource('drivers', 'DriverController');
         Route::resource('orders', 'OrderController');
     });
 });
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
