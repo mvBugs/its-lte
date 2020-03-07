@@ -22,9 +22,14 @@
                             <thead>
                             <tr>
                                 <th style="width:35px;">#</th>
-                                <th>Логин</th>
-                                <th>Телефон</th>
-                                <th>Баланс</th>
+                                <th>Категория</th>
+                                <th>Цена</th>
+                                <th>Вркмя</th>
+                                <th>Откуда</th>
+                                <th>Куда</th>
+                                <th>Комментарий</th>
+                                <th>Водитель</th>
+                                <th>Статус</th>
                                 {{--
                                 <th style="text-align: center">Опубликовано</th>
                                 --}}
@@ -35,13 +40,22 @@
                             @foreach($orders as $order)
                                 <tr>
                                     <td>{{ $order->id }}</td>
-                                    <td>{{ $order->login }}</td>
-                                    <td>{{ $order->phone }}</td>
-                                    <td>{{ $order->balance }}</td>
+                                    <td>{{ $order->city_type }}</td>
+                                    <td>{{ $order->price }}</td>
+                                    <td>{{ $order->time }}</td>
+                                    <td>{{ $order->from_street.' '.$order->from_house.' '.$order->from_entrance }}</td>
+                                    <td>{{ $order->to_street.' '.$order->to_house.' '.$order->to_entrance }}</td>
+                                    <td>{{ $order->comment }}</td>
+                                    <td>
+                                        @if($driver = $order->driver)
+                                            {{ $driver->login }}
+                                        @endif
+                                    </td>
+                                    <td>{{ $order->status }}</td>
                                     <td style="width: 110px">
                                         <div class="btn-group">
                                             {{--<a href="{{ route('admin.drivers.edit', $driver) }}" class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></a>--}}
-                                            <a href="#" data-url="{{ route('admin.drivers.destroy', $driver) }}" class="btn btn-xs btn-danger js-action-destroy"><i class="fa fa-remove"></i></a>
+                                            <a href="#" data-url="{{ route('admin.orders.destroy', $order) }}" class="btn btn-xs btn-danger js-action-destroy"><i class="fa fa-remove"></i></a>
                                         </div>
                                     </td>
                                 </tr>

@@ -19,4 +19,9 @@ class Order extends Model
         'city_type',
         'status'
     ];
+
+    public function driver()
+    {
+        return $this->belongsTo(Driver::class);
+    }
 }

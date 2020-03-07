@@ -58,7 +58,7 @@
     "/api/login" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"login":9,"password":"enim"}'
+    -d '{"login":9,"password":"ipsa"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "/api/login"
@@ -71,7 +71,7 @@ let headers = {
 
 let body = {
     "login": 9,
-    "password": "enim"
+    "password": "ipsa"
 }
 
 fetch(url, {
@@ -161,7 +161,7 @@ fetch(url, {
     "/api/order/create" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"price":3,"time":"nihil","from_street":"quo","from_house":"fugit","from_entrance":"sit","to_street":"recusandae","to_house":"eos","to_entrance":"possimus","comment":"necessitatibus","city_type":"ut"}'
+    -d '{"price":15,"time":"laudantium","from_street":"aliquam","from_house":"voluptas","from_entrance":"sit","to_street":"error","to_house":"laborum","to_entrance":"et","comment":"et","city_type":"nam"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "/api/order/create"
@@ -173,16 +173,16 @@ let headers = {
 };
 
 let body = {
-    "price": 3,
-    "time": "nihil",
-    "from_street": "quo",
-    "from_house": "fugit",
+    "price": 15,
+    "time": "laudantium",
+    "from_street": "aliquam",
+    "from_house": "voluptas",
     "from_entrance": "sit",
-    "to_street": "recusandae",
-    "to_house": "eos",
-    "to_entrance": "possimus",
-    "comment": "necessitatibus",
-    "city_type": "ut"
+    "to_street": "error",
+    "to_house": "laborum",
+    "to_entrance": "et",
+    "comment": "et",
+    "city_type": "nam"
 }
 
 fetch(url, {
@@ -268,7 +268,7 @@ fetch(url, {
     -G "/api/orders" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"city_type":"dolorum"}'
+    -d '{"city_type":"similique"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "/api/orders"
@@ -280,7 +280,7 @@ let headers = {
 };
 
 let body = {
-    "city_type": "dolorum"
+    "city_type": "similique"
 }
 
 fetch(url, {
@@ -329,7 +329,7 @@ fetch(url, {
     "/api/order/confirm" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"driver_id":17,"order_id":9}'
+    -d '{"order_id":11}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "/api/order/confirm"
@@ -341,8 +341,7 @@ let headers = {
 };
 
 let body = {
-    "driver_id": 17,
-    "order_id": 9
+    "order_id": 11
 }
 
 fetch(url, {
@@ -366,11 +365,6 @@ fetch(url, {
 </thead>
 <tbody>
 <tr>
-<td><code>driver_id</code></td>
-<td>integer</td>
-<td>required</td>
-</tr>
-<tr>
 <td><code>order_id</code></td>
 <td>integer</td>
 <td>required</td>
@@ -384,18 +378,12 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
-    -G "/api/user/order/1?id=architecto" \
+    -G "/api/user/order/tenetur" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "/api/user/order/1"
+    "/api/user/order/tenetur"
 );
-
-let params = {
-    "id": "architecto",
-};
-Object.keys(params)
-    .forEach(key =&gt; url.searchParams.append(key, params[key]));
 
 let headers = {
     "Content-Type": "application/json",
@@ -412,11 +400,11 @@ fetch(url, {
 <p>Example response (404):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "message": "No query results for model [App\\Order] 1"
+    "message": "No query results for model [App\\Order] tenetur"
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/user/order/{id}</code></p>
-<h4>Query Parameters</h4>
+<h4>URL Parameters</h4>
 <table>
 <thead>
 <tr>
@@ -440,18 +428,12 @@ fetch(url, {
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
-    -G "/api/order/cancel/1?id=deleniti" \
+    -G "/api/order/cancel/ducimus" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "/api/order/cancel/1"
+    "/api/order/cancel/ducimus"
 );
-
-let params = {
-    "id": "deleniti",
-};
-Object.keys(params)
-    .forEach(key =&gt; url.searchParams.append(key, params[key]));
 
 let headers = {
     "Content-Type": "application/json",
@@ -468,11 +450,11 @@ fetch(url, {
 <p>Example response (404):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "message": "No query results for model [App\\Order] 1"
+    "message": "No query results for model [App\\Order] ducimus"
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/order/cancel/{id}</code></p>
-<h4>Query Parameters</h4>
+<h4>URL Parameters</h4>
 <table>
 <thead>
 <tr>

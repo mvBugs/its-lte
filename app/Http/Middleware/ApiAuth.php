@@ -19,7 +19,6 @@ class ApiAuth
         if ($token = $request->header('accept-token')) {
             $driver = Driver::where('api_token', $token)->first();
             if ($driver) {
-
                 return $next($request);
             }
         }

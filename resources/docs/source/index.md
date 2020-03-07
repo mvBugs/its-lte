@@ -32,7 +32,7 @@ curl -X POST \
     "/api/login" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"login":9,"password":"enim"}'
+    -d '{"login":9,"password":"ipsa"}'
 
 ```
 
@@ -48,7 +48,7 @@ let headers = {
 
 let body = {
     "login": 9,
-    "password": "enim"
+    "password": "ipsa"
 }
 
 fetch(url, {
@@ -138,7 +138,7 @@ curl -X POST \
     "/api/order/create" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"price":3,"time":"nihil","from_street":"quo","from_house":"fugit","from_entrance":"sit","to_street":"recusandae","to_house":"eos","to_entrance":"possimus","comment":"necessitatibus","city_type":"ut"}'
+    -d '{"price":15,"time":"laudantium","from_street":"aliquam","from_house":"voluptas","from_entrance":"sit","to_street":"error","to_house":"laborum","to_entrance":"et","comment":"et","city_type":"nam"}'
 
 ```
 
@@ -153,16 +153,16 @@ let headers = {
 };
 
 let body = {
-    "price": 3,
-    "time": "nihil",
-    "from_street": "quo",
-    "from_house": "fugit",
+    "price": 15,
+    "time": "laudantium",
+    "from_street": "aliquam",
+    "from_house": "voluptas",
     "from_entrance": "sit",
-    "to_street": "recusandae",
-    "to_house": "eos",
-    "to_entrance": "possimus",
-    "comment": "necessitatibus",
-    "city_type": "ut"
+    "to_street": "error",
+    "to_house": "laborum",
+    "to_entrance": "et",
+    "comment": "et",
+    "city_type": "nam"
 }
 
 fetch(url, {
@@ -204,7 +204,7 @@ curl -X GET \
     -G "/api/orders" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"city_type":"dolorum"}'
+    -d '{"city_type":"similique"}'
 
 ```
 
@@ -219,7 +219,7 @@ let headers = {
 };
 
 let body = {
-    "city_type": "dolorum"
+    "city_type": "similique"
 }
 
 fetch(url, {
@@ -261,7 +261,7 @@ curl -X POST \
     "/api/order/confirm" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"driver_id":17,"order_id":9}'
+    -d '{"order_id":11}'
 
 ```
 
@@ -276,8 +276,7 @@ let headers = {
 };
 
 let body = {
-    "driver_id": 17,
-    "order_id": 9
+    "order_id": 11
 }
 
 fetch(url, {
@@ -297,8 +296,7 @@ fetch(url, {
 #### Body Parameters
 Parameter | Type | Status | Description
 --------- | ------- | ------- | ------- | -----------
-    `driver_id` | integer |  required  | 
-        `order_id` | integer |  required  | 
+    `order_id` | integer |  required  | 
     
 <!-- END_9d30346008ff546466a6f25b0ab71fad -->
 
@@ -308,21 +306,15 @@ Parameter | Type | Status | Description
 
 ```bash
 curl -X GET \
-    -G "/api/user/order/1?id=architecto" \
+    -G "/api/user/order/tenetur" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "/api/user/order/1"
+    "/api/user/order/tenetur"
 );
-
-let params = {
-    "id": "architecto",
-};
-Object.keys(params)
-    .forEach(key => url.searchParams.append(key, params[key]));
 
 let headers = {
     "Content-Type": "application/json",
@@ -342,17 +334,17 @@ fetch(url, {
 
 ```json
 {
-    "message": "No query results for model [App\\Order] 1"
+    "message": "No query results for model [App\\Order] tenetur"
 }
 ```
 
 ### HTTP Request
 `GET api/user/order/{id}`
 
-#### Query Parameters
+#### URL Parameters
 
 Parameter | Status | Description
---------- | ------- | ------- | -----------
+--------- | ------- | ------- | -------
     `id` |  optional  | int required. Order id
 
 <!-- END_d52c5da2483ab63fece901e549a619bc -->
@@ -363,21 +355,15 @@ Parameter | Status | Description
 
 ```bash
 curl -X GET \
-    -G "/api/order/cancel/1?id=deleniti" \
+    -G "/api/order/cancel/ducimus" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "/api/order/cancel/1"
+    "/api/order/cancel/ducimus"
 );
-
-let params = {
-    "id": "deleniti",
-};
-Object.keys(params)
-    .forEach(key => url.searchParams.append(key, params[key]));
 
 let headers = {
     "Content-Type": "application/json",
@@ -397,17 +383,17 @@ fetch(url, {
 
 ```json
 {
-    "message": "No query results for model [App\\Order] 1"
+    "message": "No query results for model [App\\Order] ducimus"
 }
 ```
 
 ### HTTP Request
 `GET api/order/cancel/{id}`
 
-#### Query Parameters
+#### URL Parameters
 
 Parameter | Status | Description
---------- | ------- | ------- | -----------
+--------- | ------- | ------- | -------
     `id` |  optional  | int required. Order id
 
 <!-- END_cc05de6ef2d85155ed5ab0bdd0ea9909 -->

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Driver;
 use App\Http\Controllers\Controller;
 use App\Order;
 use Illuminate\Http\Request;
@@ -10,6 +11,7 @@ use Illuminate\Validation\ValidationException;
 class OrderController extends Controller
 {
     /**
+     * @headParam accept-token string required
      * @bodyParam city_type string required The usharal or intercity.
      */
 
@@ -74,16 +76,20 @@ class OrderController extends Controller
     }
 
     /**
-     * @bodyParam driver_id int required
+     * @headParam accept-token string required
      * @bodyParam order_id int required
      */
 
     public function confirm(Request $request)
     {
         $request->validate([
-            'driver_id' => 'required',
             'order_id' => 'required',
         ]);
+
+        $token = $request->header('accept-token');
+
+        $driver = Driver::where('api_token', $token)->first();
+
 
         $order = Order::find($request->get('order_id'));
 
@@ -94,14 +100,14 @@ class OrderController extends Controller
             ]);
         }
 
-        $order->driver_id = $request->get('driver_id');
+        $order->driver_id = $driver->id;
         $order->status = 'confirmed';
         $order->save();
         return \App\Http\Resources\OrderConfimed::make($order);
     }
 
     /**
-     * @queryParam id int required. Order id
+     * @urlParam id int required. Order id
      */
 
     public function userOrder($id)
@@ -112,7 +118,7 @@ class OrderController extends Controller
     }
 
     /**
-     * @queryParam id int required. Order id
+     * @urlParam id int required. Order id
      */
     public function cancel($id)
     {
