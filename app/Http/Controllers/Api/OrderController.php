@@ -9,6 +9,10 @@ use Illuminate\Validation\ValidationException;
 
 class OrderController extends Controller
 {
+    /**
+     * @bodyParam city_type string required The usharal or intercity.
+     */
+
     public function index(Request $request)
     {
         $request->validate([
@@ -24,6 +28,19 @@ class OrderController extends Controller
         return new \App\Http\Resources\OrderCollection($orders);
     }
 
+    /**
+     * @bodyParam price int required
+     * @bodyParam time string required
+     * @bodyParam from_street string required
+     * @bodyParam from_house string required
+     * @bodyParam from_entrance string required
+     * @bodyParam to_street string required
+     * @bodyParam to_house string required
+     * @bodyParam to_entrance string required
+     * @bodyParam comment string required
+     * @bodyParam city_type string required. usharal or intercity
+     *
+     */
     public function create(Request $request)
     {
         $request->validate([
@@ -56,6 +73,11 @@ class OrderController extends Controller
         return new \App\Http\Resources\Order($order);
     }
 
+    /**
+     * @bodyParam driver_id int required
+     * @bodyParam order_id int required
+     */
+
     public function confirm(Request $request)
     {
         $request->validate([
@@ -78,6 +100,10 @@ class OrderController extends Controller
         return \App\Http\Resources\OrderConfimed::make($order);
     }
 
+    /**
+     * @queryParam id int required. Order id
+     */
+
     public function userOrder($id)
     {
         $order = Order::findOrFail($id);
@@ -85,6 +111,9 @@ class OrderController extends Controller
         return \App\Http\Resources\Order::make($order);
     }
 
+    /**
+     * @queryParam id int required. Order id
+     */
     public function cancel($id)
     {
         $order = Order::findOrFail($id);

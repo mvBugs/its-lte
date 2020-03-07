@@ -27,3 +27,6 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'namespace' => 'Web']
     });
 });
 
+Route::get('apidoc', function () {
+    return view('apidoc.index');
+})->name('apidoc');

@@ -10,14 +10,17 @@ use Illuminate\Support\Str;
 class AuthController extends Controller
 {
     /**
-     * Login user and create token
+     * @bodyParam login int required The id of the user. Example: 9
+     * @bodyParam password string The id of the room.
      *
-     * @param  [string] email
-     * @param  [string] password
-     * @param  [boolean] remember_me
-     * @return [string] access_token
-     * @return [string] token_type
-     * @return [string] expires_at
+     * @response 200 {
+     *    "access_token": 'string',
+     *    "balance": 123,
+     * }
+     *
+     * @response 404 {
+     *  "message": "Неверный логин/пароль"
+     * }
      */
     public function login(Request $request)
     {
@@ -49,9 +52,9 @@ class AuthController extends Controller
     }
 
     /**
-     * Logout user (Revoke the token)
-     *
-     * @return [string] message
+     * @response {
+     *  "message": "Successfully logged out"
+     * }
      */
     public function logout(Request $request)
     {
