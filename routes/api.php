@@ -17,10 +17,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/login', 'Api\Auth\LoginController@login');
+Route::post('/login', 'Api\AuthController@login');
+Route::get('/logout', 'Api\AuthController@logout');
 
 Route::post('order/create', 'Api\OrderController@create');
-Route::get('orders', 'Api\OrderController@index');
-Route::post('order/confirm', 'Api\OrderController@confirm');
+Route::get('orders', 'Api\OrderController@index')->middleware('api-auth');
+Route::post('order/confirm', 'Api\OrderController@confirm')->middleware('api-auth');
 Route::get('user/order/{id}', 'Api\OrderController@userOrder');
 Route::get('order/cancel/{id}', 'Api\OrderController@cancel');

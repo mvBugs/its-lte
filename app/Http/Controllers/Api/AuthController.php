@@ -2,50 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Driver;
 use App\Http\Controllers\Controller;
-use App\User;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Dotenv\Validator;
-use Laravel\Passport\Http\Controllers;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
-        $this->middleware('guest:api')->except('logout');
-        $this->middleware('guest:web')->except('logout');
-    }
-
-    /**
-     * Create user
-     *
-     * @param  [string] name
-     * @param  [string] email
-     * @param  [string] password
-     * @param  [string] password_confirmation
-     * @return [string] message
-     */
-    public function signup(Request $request)
-    {
-        $request->validate([
-            'phone' => 'required|string',
-            'login' => 'required|string|unique:users',
-            'password' => 'required|string|confirmed'
-        ]);
-        $user = new User([
-            'phone' => $request->phone,
-            'login' => $request->login,
-            'password' => bcrypt($request->password)
-        ]);
-        $user->save();
-        return response()->json([
-            'message' => 'Successfully created user!'
-        ], 201);
-    }
-
     /**
      * Login user and create token
      *
@@ -63,27 +26,25 @@ class AuthController extends Controller
             'password' => 'required|string'
         ]);
 
-        $credentials = request(['login', 'password']);
+        $driver = Driver::where('login', $request->login)->where('password', $request->password)->first();
 
-        if(!Auth::attempt($credentials)) {
+        if (!$driver) {
             return response()->json([
-                'message' => 'Unauthorized'
-            ], 401);
+                'data' => ['message' => 'Неверный логин/пароль'],
+                'error_code' => 3
+            ]);
         }
 
-        $user = $request->user();
+        $token = Str::random(80);
+        $driver->api_token = $token;
 
-        $tokenResult = $user->createToken('Personal Access Token');
-        $token = $tokenResult->token;
-        if ($request->remember_me)
-            $token->expires_at = Carbon::now()->addWeeks(1);
-        $token->save();
+        $driver->save();
+
         return response()->json([
-            'access_token' => $tokenResult->accessToken,
-            'token_type' => 'Bearer',
-            'expires_at' => Carbon::parse(
-                $tokenResult->token->expires_at
-            )->toDateTimeString()
+            'data' => [
+                'access_token' => $token,
+                'balance' => $driver->balance
+            ]
         ]);
     }
 
@@ -94,7 +55,13 @@ class AuthController extends Controller
      */
     public function logout(Request $request)
     {
-        $request->user()->token()->revoke();
+        if ($token = $request->header('accept-token')) {
+            $driver = Driver::where('api_token', $token)->first();
+            if ($driver) {
+                $driver->token = null;
+                $driver->save();
+            }
+        }
         return response()->json([
             'message' => 'Successfully logged out'
         ]);

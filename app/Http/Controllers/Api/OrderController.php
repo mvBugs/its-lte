@@ -63,11 +63,11 @@ class OrderController extends Controller
             'order_id' => 'required',
         ]);
 
-        $order = Order::findOrFail($request->get('order_id'));
+        $order = Order::find($request->get('order_id'));
 
-        if ($order->status !== 'new') {
+        if (!$order || $order->status !== 'new') {
             return response()->json([
-                'data' => ['message' => 'Заказ уже ринят'],
+                'data' => ['message' => 'Заказ уже принят'],
                 'error_code' => 1
             ]);
         }

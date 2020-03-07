@@ -13,7 +13,7 @@ class DriversSeeder extends Seeder
     {
         \App\Driver::updateOrCreate(['login' => 'driver'],[
             'phone' => '+38098074280',
-            'password' => bcrypt('password'),
+            'password' => 'password',
             'balance' => 0,
         ]);
     }
