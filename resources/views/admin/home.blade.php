@@ -30,7 +30,7 @@
                                     ]) !!}
                                         <div class="form-group {{ $errors->has('commission') ? 'has-error' : ''}}">
                                             {!! Form::label('commission', 'Коммисия', ['class' => 'control-label']) !!}
-                                            {!! Form::number('commission', null, ['class' => 'form-control', 'required']) !!}
+                                            {!! Form::number('commission', null, ['class' => 'form-control', 'required', 'min'=>0,'max'=>100]) !!}
                                             {!! $errors->first('commission', '<p class="help-block">:message</p>') !!}
                                         </div>
                                         <button class="btn btn-success">Сохранить</button>

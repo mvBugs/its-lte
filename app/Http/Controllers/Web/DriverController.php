@@ -87,8 +87,8 @@ class DriverController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'login' => 'required|unique:drivers,login',
-            'phone' => 'required|unique:drivers,phone',
+            'login' => 'required',
+            'phone' => 'required',
             'balance' => 'integer',
             'password' => 'required',
         ]);

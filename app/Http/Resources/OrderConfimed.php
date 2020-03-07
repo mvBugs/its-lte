@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Driver;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class OrderConfimed extends JsonResource
@@ -19,8 +20,11 @@ class OrderConfimed extends JsonResource
 
     public function with($request)
     {
+        $token = request()->header('accept-token');
+        $driver = Driver::where('api_token', $token)->first();
+
         return [
-            'balance' => 10000
+            'balance' => $driver->balance
         ];
     }
 }

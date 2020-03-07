@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Driver;
 use App\Http\Controllers\Controller;
+use App\Location;
 use App\Order;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -90,7 +91,6 @@ class OrderController extends Controller
 
         $driver = Driver::where('api_token', $token)->first();
 
-
         $order = Order::find($request->get('order_id'));
 
         if (!$order || $order->status !== 'new') {
@@ -99,6 +99,21 @@ class OrderController extends Controller
                 'error_code' => 1
             ]);
         }
+
+        $location = Location::where('slug', $order->city_type)->first();
+        $commision = $location->coission ?? 1;
+        $commisionAmount = $order->price * $commision;
+
+        $driverBalance = $driver->balance;
+        if ($driverBalance < $commisionAmount) {
+            return response()->json([
+                'data' => ['message' => 'Недостаочно средств'],
+                'error_code' => 4
+            ]);
+        }
+
+        $driver->balance = $driverBalance - $commisionAmount;
+        $driver->save();
 
         $order->driver_id = $driver->id;
         $order->status = 'confirmed';
