@@ -57,6 +57,7 @@ class OrderController extends Controller
             'to_entrance' => 'nullable',
             'comment' => 'required',
             'city_type' => 'required',
+            'phone' => 'required|string',
         ]);
 
         $order = Order::create([
@@ -70,6 +71,7 @@ class OrderController extends Controller
             'to_entrance' => $request->get('to_entrance'),
             'comment' => $request->get('comment'),
             'city_type' => $request->get('city_type'),
+            'phone' => $request->get('phone'),
             'status' => 'new',
         ]);
 

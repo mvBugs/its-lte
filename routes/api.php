@@ -23,5 +23,6 @@ Route::get('/logout', 'Api\AuthController@logout');
 Route::post('order/create', 'Api\OrderController@create');
 Route::get('orders', 'Api\OrderController@index')->middleware('api-auth');
 Route::post('order/confirm', 'Api\OrderController@confirm')->middleware('api-auth');
+Route::get('driver/balance', 'Api\AuthController@user')->middleware('api-auth');
 Route::get('user/order/{id}', 'Api\OrderController@userOrder');
 Route::get('order/cancel/{id}', 'Api\OrderController@cancel');

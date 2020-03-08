@@ -17,7 +17,8 @@ class Order extends Model
         'to_entrance',
         'comment',
         'city_type',
-        'status'
+        'status',
+        'phone'
     ];
 
     public function driver()

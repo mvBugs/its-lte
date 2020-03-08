@@ -29,7 +29,11 @@ class AuthController extends Controller
             'password' => 'required|string'
         ]);
 
-        $driver = Driver::where('login', $request->login)->where('password', $request->password)->first();
+        $login = $request->login;
+
+        $driver = Driver::where(function ($query) use ($login) {
+            $query->where('login', $login)->orWhere('phone', $login);
+        })->where('password', $request->password)->first();
 
         if (!$driver) {
             return response()->json([
@@ -77,6 +81,20 @@ class AuthController extends Controller
      */
     public function user(Request $request)
     {
-        return response()->json($request->user());
+        if ($token = $request->header('accept-token')) {
+            $driver = Driver::where('api_token', $token)->first();
+            if ($driver) {
+                return response()->json([
+                    'data' => [
+                        'balance' => $driver->balance
+                    ]
+                ]);
+            }
+        }
+
+        return response()->json([
+            'data' => ['message' => 'Неверный токен'],
+            'error_code' => 5
+        ]);
     }
 }
