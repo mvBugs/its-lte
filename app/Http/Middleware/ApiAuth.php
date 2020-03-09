@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Driver;
 use Closure;
+use Illuminate\Support\Facades\Log;
 
 class ApiAuth
 {
@@ -23,9 +24,12 @@ class ApiAuth
             }
         }
 
+//        Log::info($request->header('accept-token'));
+
         return response()->json([
             'data' => [
-                'message' => trans('auth.failed')
+                'message' => trans('auth.failed'),
+                'accept-token' => $request->header('accept-token')
             ]
         ]);
     }
