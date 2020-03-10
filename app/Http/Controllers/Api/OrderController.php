@@ -103,8 +103,8 @@ class OrderController extends Controller
         }
 
         $location = Location::where('slug', $order->city_type)->first();
-        $commision = $location->coission ?? 1;
-        $commisionAmount = $order->price * $commision;
+        $commission = $location->commission ?? 1;
+        $commisionAmount = $order->price * $commission / 100;
 
         $driverBalance = $driver->balance;
         if ($driverBalance < $commisionAmount) {

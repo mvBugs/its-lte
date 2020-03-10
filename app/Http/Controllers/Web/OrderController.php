@@ -15,7 +15,11 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::paginate();
+        $queryOrder = "CASE WHEN status = 'new' THEN 1 ";
+        $queryOrder .= "WHEN status = 'confirmed' THEN 2 ";
+        $queryOrder .= "ELSE 3 END";
+
+        $orders = Order::orderByRaw($queryOrder)->paginate();
         return view('admin.orders.index', compact('orders'));
     }
 
