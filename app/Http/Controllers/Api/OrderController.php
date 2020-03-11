@@ -26,7 +26,7 @@ class OrderController extends Controller
 
         $orders = Order::when($cityType !== 'all', function ($query) use ($cityType) {
             $query->where('city_type', $cityType);
-        })->where('status', 'new')->get();
+        })->where('status', 'new')->orderByDesc('created_at')->get();
 
         return new \App\Http\Resources\OrderCollection($orders);
     }

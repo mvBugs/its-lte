@@ -19,7 +19,7 @@ class OrderController extends Controller
         $queryOrder .= "WHEN status = 'confirmed' THEN 2 ";
         $queryOrder .= "ELSE 3 END";
 
-        $orders = Order::orderByRaw($queryOrder)->paginate();
+        $orders = Order::orderByDesc('created_at')->paginate();
         return view('admin.orders.index', compact('orders'));
     }
 
