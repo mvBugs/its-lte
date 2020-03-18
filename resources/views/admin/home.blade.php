@@ -44,4 +44,50 @@
             @endforeach
         </div>
     </section>
+
+    <section class="content">
+        <div class="box">
+{{--            <div class="box-header">
+                <h3 class="box-title">Список ({{ $drivers->total() }})</h3>
+            </div>--}}
+            <div class="box-body">
+{{--                @unless($drivers->count())
+                    @include('admin.inc.empty-rows', ['url_create' => route('admin.drivers.create', ['type' => request('type')])])
+                @else--}}
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th style="width:35px;">#</th>
+                                <th>Откуда</th>
+                                <th>Куда</th>
+                                <th>Цена</th>
+                                {{--
+                                <th style="text-align: center">Опубликовано</th>
+                                --}}
+                                <th style="width:100px;">Действия</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($prices as $price)
+                                <tr>
+                                    <td>{{ $price->id }}</td>
+                                    <td>{{ $price->toCity->name }}</td>
+                                    <td>{{ $price->fromCity->name }}</td>
+                                    <td>{{ $price->price }}</td>
+                                    <td style="width: 110px">
+                                        <div class="btn-group">
+                                            <a href="{{ route('admin.price.edit', $price) }}" class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></a>
+                                            {{--<a href="#" data-url="{{ route('admin.price.update', $price) }}" data-key="{{ $price->id }}" class="btn btn-xs btn-success js-action-change-price"><i class="fa fa-save"></i></a>--}}
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                {{--@endunless--}}
+            </div>
+        </div>
+    </section>
 @endsection

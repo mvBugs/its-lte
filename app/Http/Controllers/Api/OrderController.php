@@ -114,6 +114,7 @@ class OrderController extends Controller
             ]);
         }
 
+        $driver->salary += $order->price;
         $driver->balance = $driverBalance - $commisionAmount;
         $driver->save();
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Location;
+use App\Price;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -21,7 +22,9 @@ class HomeController extends Controller
     public function index()
     {
         $locations = Location::all();
-        return view('admin.home', compact('locations'));
+        $prices = Price::all();
+
+        return view('admin.home', compact('locations', 'prices'));
     }
 
     public function updateLocation(Request $request, $id)
@@ -34,5 +37,25 @@ class HomeController extends Controller
         ]);
 
         return redirect()->route('home');
+    }
+
+
+    public function updatePrice(Request $request, $id)
+    {
+        $request->validate([
+            'price' => 'required|integer'
+        ]);
+        Price::findOrFail($id)->update([
+            'price' => $request->get('price')
+        ]);
+
+        return redirect()->route('home');
+    }
+
+    public function editPrice($id)
+    {
+        $price = Price::findOrFail($id);
+
+        return view('admin.price.edit', compact('price'));
     }
 }

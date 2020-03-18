@@ -96,6 +96,7 @@
     @csrf
     @method('POST')
     <input type="hidden" name="destination">
+    <input type="number" name="price" hidden>
 </form>
 <script>
     $('.js-action-destroy').on('click', function (e) {
@@ -116,6 +117,17 @@
             $form.find('input[name="destination"]').val($(this).data('destination'))
             $form.attr('action', $(this).data('url')).submit()
         }
+        return false
+    })
+
+    $('.js-action-change-price').on('click', function (e) {
+        e.preventDefault()
+        var id = $(this).data('key')
+        var $formData = $('#js-action-form-'+id)
+        var $form = $('#js-action-form')
+        $form.find('input[name="_method"]').val('PATCH')
+        $form.find('input[name="price"]').val($formData.find('input[name="'+id+'"]'))
+        $form.attr('action', $(this).data('url')).submit()
         return false
     })
 

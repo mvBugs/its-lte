@@ -28,10 +28,6 @@
                                 <th>Логин</th>
                                 <th>Телефон</th>
                                 <th>Баланс</th>
-                                <th>Заработал</th>
-                                <th>Марка - модель</th>
-                                <th>Номер автомобиля</th>
-                                <th>Цвет автомобиля</th>
                                 {{--
                                 <th style="text-align: center">Опубликовано</th>
                                 --}}
@@ -45,10 +41,6 @@
                                     <td>{{ $driver->login }}</td>
                                     <td>{{ $driver->phone }}</td>
                                     <td>{{ $driver->balance }}</td>
-                                    <td>{{ $driver->salary }}</td>
-                                    <td>{{ $driver->car_model }}</td>
-                                    <td>{{ $driver->car_number }}</td>
-                                    <td>{{ $driver->car_color }}</td>
                                     <td style="width: 110px">
                                         <div class="btn-group">
                                             <a href="{{ route('admin.drivers.edit', $driver) }}" class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></a>

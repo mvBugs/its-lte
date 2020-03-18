@@ -50,6 +50,9 @@ class DriverController extends Controller
             'phone' => $request->get('phone'),
             'balance' => $request->get('balance'),
             'password' => $request->get('password'),
+            'car_model' => $request->get('car_model'),
+            'car_number' => $request->get('car_number'),
+            'car_color' => $request->get('car_color'),
         ]);
         return redirect()->route('admin.drivers.index');
     }
@@ -97,7 +100,9 @@ class DriverController extends Controller
             'login' => $request->get('login'),
             'phone' => $request->get('phone'),
             'balance' => $request->get('balance'),
-            'password' => $request->get('password'),
+            'car_model' => $request->get('car_model'),
+            'car_number' => $request->get('car_number'),
+            'car_color' => $request->get('car_color'),
         ]);
         return redirect()->route('admin.drivers.index');
     }
