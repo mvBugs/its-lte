@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\City;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\IntercityDriverOrder;
 use App\Http\Resources\IntercityOrderCollection;
 use App\IntercityOrder;
 use App\Price;
@@ -81,6 +82,10 @@ class IntercityOrderController extends Controller
 
         $intercityOrder = IntercityOrder::create($data);
 
+        if ($intercityOrder->user_type === 'driver') {
+            return new IntercityDriverOrder($intercityOrder);
+        }
+
         return new \App\Http\Resources\IntercityOrder($intercityOrder);
     }
 
@@ -93,7 +98,11 @@ class IntercityOrderController extends Controller
             ->orderByDesc('created_at')
             ->get();
 
-        return \App\Http\Resources\IntercityOrder::make($orders);
+        if ($type === 'driver') {
+            return IntercityDriverOrder::collection($orders);
+        }
+
+        return \App\Http\Resources\IntercityOrder::collection($orders);
     }
 
 

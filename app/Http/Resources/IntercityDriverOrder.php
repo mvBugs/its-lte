@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class IntercityOrder extends JsonResource
+class IntercityDriverOrder extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -23,6 +23,19 @@ class IntercityOrder extends JsonResource
             'price' => (string) $this->price,
             'phone' => (string) $this->phone,
             'comment' => (string) $this->comment,
+            'car_model' => $this->driver->car_model,
+            'car_number' => $this->driver->car_number,
+            'car_color' => $this->driver->car_color
         ];
+    }
+
+    public function with($request)
+    {
+        if ($driver = auth_driver()) {
+            return [
+                'balance' => $driver->balance
+            ];
+        }
+        return [];
     }
 }
