@@ -40,6 +40,7 @@ class IntercityOrderController extends Controller
             'date' => 'required|string',
             'price' => 'required|integer',
             'phone' => 'required|string',
+            'user_type' => 'required|string',
             'comment' => '',
         ]);
 
@@ -55,8 +56,9 @@ class IntercityOrderController extends Controller
             'status' => 'new',
             'user_type' => 'client',
         ];
-
-        if ($driver = auth_driver()) {
+        $userType = $request->get('user_type');
+        $driver = auth_driver();
+        if ($driver && $userType == 'driver') {
             $data['driver_id'] = $driver->id;
             $data['user_type'] = 'driver';
 
