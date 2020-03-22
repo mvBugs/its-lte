@@ -41,7 +41,7 @@ class AdminMenuTableSeeder extends MenuBaseSeeder
                     ],
 
                     [
-                        'name' => 'Головна',
+                        'name' => 'Главная',
                         'path' => 'admin',
                         'data' => [
                             'permissions' => ['dashboard.home.read'],
@@ -59,8 +59,17 @@ class AdminMenuTableSeeder extends MenuBaseSeeder
                         ],
                     ],
                     [
-                        'name' => 'Закази',
+                        'name' => 'Заказы Ушарал',
                         'path' => 'admin/orders',
+                        'data' => [
+                            'permissions' => ['dashboard.home.read'],
+                            'icon' => 'fa fa-book',
+                            'pattern_url' => '\S*admin\/?((\?{1}\S*)|$)',
+                        ],
+                    ],
+                    [
+                        'name' => 'Заказы Межгород',
+                        'path' => 'admin/intercity-orders',
                         'data' => [
                             'permissions' => ['dashboard.home.read'],
                             'icon' => 'fa fa-book',

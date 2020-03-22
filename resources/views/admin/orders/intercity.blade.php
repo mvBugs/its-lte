@@ -22,7 +22,6 @@
                             <thead>
                             <tr>
                                 <th style="width:35px;">#</th>
-                                <th>Категория</th>
                                 <th>Цена</th>
                                 <th>Время</th>
                                 <th>Откуда</th>
@@ -40,11 +39,10 @@
                             @foreach($orders as $order)
                                 <tr>
                                     <td>{{ $order->id }}</td>
-                                    <td>{{ $order->city_type }}</td>
                                     <td>{{ $order->price }}</td>
-                                    <td>{{ $order->time }}</td>
-                                    <td>{{ $order->from_street.' '.$order->from_house.' '.$order->from_entrance }}</td>
-                                    <td>{{ $order->to_street.' '.$order->to_house.' '.$order->to_entrance }}</td>
+                                    <td>{{ $order->date->format('d-m-Y H:i') }}</td>
+                                    <td>{{ $order->fromCity->name }}</td>
+                                    <td>{{ $order->toCity->name }}</td>
                                     <td>{{ $order->comment }}</td>
                                     <td>
                                         @if($driver = $order->driver)
@@ -55,7 +53,7 @@
                                     <td style="width: 110px">
                                         <div class="btn-group">
                                             {{--<a href="{{ route('admin.drivers.edit', $driver) }}" class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></a>--}}
-                                            <a href="#" data-url="{{ route('admin.orders.destroy', $order) }}" class="btn btn-xs btn-danger js-action-destroy"><i class="fa fa-remove"></i></a>
+                                            <a href="#" data-url="{{ route('admin.intercity-orders.destroy', $order) }}" class="btn btn-xs btn-danger js-action-destroy"><i class="fa fa-remove"></i></a>
                                         </div>
                                     </td>
                                 </tr>

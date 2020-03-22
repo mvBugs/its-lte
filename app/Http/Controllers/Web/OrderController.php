@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\IntercityOrder;
 use App\Order;
 use Illuminate\Http\Request;
 
@@ -21,6 +22,19 @@ class OrderController extends Controller
 
         $orders = Order::orderByDesc('created_at')->paginate();
         return view('admin.orders.index', compact('orders'));
+    }
+
+    public function intercityOrders()
+    {
+        $orders = IntercityOrder::orderByDesc('created_at')->paginate();
+        return view('admin.orders.intercity', compact('orders'));
+    }
+
+    public function intercityDestroy($id)
+    {
+        IntercityOrder::findOrFail($id)->delete();
+
+        return redirect()->route('admin.intercity.orders');
     }
 
     /**

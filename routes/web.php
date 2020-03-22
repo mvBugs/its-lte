@@ -26,6 +26,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'namespace' => 'Web']
         Route::resource('clients', 'ClientController');
         Route::resource('drivers', 'DriverController');
         Route::resource('orders', 'OrderController');
+        Route::get('intercity-orders', 'OrderController@intercityOrders')->name('intercity.orders');
+        Route::delete('intercity-orders/{id}', 'OrderController@intercityDestroy')->name('intercity-orders.destroy');
     });
 });
 
