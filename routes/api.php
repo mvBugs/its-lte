@@ -31,5 +31,6 @@ Route::get('order/cancel/{id}', 'Api\OrderController@cancel');
 Route::post('intercity-order/create', 'Api\IntercityOrderController@store');
 Route::get('intercity-order/cancel/{id}', 'Api\IntercityOrderController@cancel');
 Route::get('intercity-orders/{type}', 'Api\IntercityOrderController@getOrders');
+Route::get('intercity-order/{id}', 'Api\IntercityOrderController@show');
 
 Route::get('cities', 'Api\IntercityOrderController@getCities');

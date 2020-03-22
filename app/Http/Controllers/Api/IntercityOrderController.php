@@ -26,6 +26,18 @@ class IntercityOrderController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $order = IntercityOrder::findOrFail($id);
+
+        return IntercityDriverOrder::make($order);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
