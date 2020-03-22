@@ -25,7 +25,8 @@ class IntercityDriverOrder extends JsonResource
             'comment' => (string) $this->comment,
             'car_model' => optional($this->driver)->car_model,
             'car_number' => optional($this->driver)->car_number,
-            'car_color' => optional($this->driver)->car_color
+            'car_color' => optional($this->driver)->car_color,
+            'status' => (string) $this->status,
         ];
     }
 

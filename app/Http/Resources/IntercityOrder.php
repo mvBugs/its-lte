@@ -23,6 +23,7 @@ class IntercityOrder extends JsonResource
             'price' => (string) $this->price,
             'phone' => (string) $this->phone,
             'comment' => (string) $this->comment,
+            'status' => (string) $this->status,
         ];
     }
 }
