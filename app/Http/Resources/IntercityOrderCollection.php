@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class IntercityOrderCollection extends ResourceCollection
@@ -15,5 +16,16 @@ class IntercityOrderCollection extends ResourceCollection
     public function toArray($request)
     {
         return parent::toArray($request);
+    }
+
+    public function with($request)
+    {
+        $data['active_orders'] = false;
+        if ($driver = auth_driver()) {
+            if ($driver->orders()->where('date', '>', Carbon::now())->first()) {
+                $data['active_orders'] = true;
+            }
+        }
+        return $data;
     }
 }

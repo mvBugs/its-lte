@@ -18,4 +18,9 @@ class Driver extends Model
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function orders()
+    {
+        return $this->hasMany(IntercityOrder::class);
+    }
 }

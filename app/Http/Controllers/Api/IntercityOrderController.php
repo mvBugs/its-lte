@@ -116,7 +116,7 @@ class IntercityOrderController extends Controller
             return IntercityDriverOrder::collection($orders);
         }
 
-        return \App\Http\Resources\IntercityOrder::collection($orders);
+        return new IntercityOrderCollection($orders);
     }
 
 
