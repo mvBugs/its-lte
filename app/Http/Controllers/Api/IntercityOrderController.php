@@ -106,10 +106,17 @@ class IntercityOrderController extends Controller
     //type = user or driver
     public function getOrders($type)
     {
-        $orders = IntercityOrder::where('user_type', $type)
+        $ordersQuery = IntercityOrder::where('user_type', $type)
             ->where('status', 'new')
-            ->where('date', '>', Carbon::now())
-            ->orderByDesc('created_at')
+            ->where('date', '>', Carbon::now());
+        if ($driver = auth_driver()) {
+            if ($orderDriver = $driver->orders()->where('date', '>', Carbon::now())->first()) {
+                $ordersQuery = $ordersQuery->where('city_id_to', $orderDriver->city_id_to)
+                    ->where('city_id_from', $orderDriver->city_id_from);
+            }
+        }
+
+        $orders = $ordersQuery->orderByDesc('created_at')
             ->get();
 
         if ($type === 'driver') {
