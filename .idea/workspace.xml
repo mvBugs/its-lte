@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4b2c29a1-5c72-4a4b-be02-c3eb763b6e22" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/IntercityOrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/IntercityOrderController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -261,5 +260,9 @@
       <screen x="0" y="28" width="1920" height="1052" />
     </state>
     <state x="743" y="311" width="424" height="484" key="FileChooserDialogImpl/0.28.1920.1052@0.28.1920.1052" timestamp="1585166430290" />
+    <state x="2216" y="380" key="com.intellij.ide.util.TipDialog" timestamp="1585720035619">
+      <screen x="1600" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2216" y="380" key="com.intellij.ide.util.TipDialog/1600.0.1920.1080/0.28.1600.872@1600.0.1920.1080" timestamp="1585720035619" />
   </component>
 </project>
