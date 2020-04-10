@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return redirect()->route('login');
-});
-
 Auth::routes();
 
 Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'namespace' => 'Web'], function () {
@@ -31,6 +27,4 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'namespace' => 'Web']
     });
 });
 
-Route::get('apidoc', function () {
-    return view('apidoc.index');
-})->name('apidoc');
+Route::view('apidoc', 'apidoc.index')->name('apidoc');
